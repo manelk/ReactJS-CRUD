@@ -1,124 +1,65 @@
-class Form extends React.Component {
-
-    state = {open: false, email: '', password: '', email_error_text: null, password_error_text: null, disabled: true};
-
-    handleTouchTap() {
-        this.setState({
-            open: true,
-        });
-    }
-
-    isDisabled() {
-        let emailIsValid = false;
-        let passwordIsValid = false;
-
-        if (this.state.email === "") {
-            this.setState({
-                email_error_text: null
-            });
-        } else {
-            if (validateEmail(this.state.email)) {
-                emailIsValid = true
-                this.setState({
-                    email_error_text: null
-                });
-            } else {
-                this.setState({
-                    email_error_text: "Sorry, this is not a valid email"
-                });
-            }
-        }
-
-        if (this.state.password === "" || !this.state.password) {
-            this.setState({
-                password_error_text: null
-            });
-        } else {
-            if (this.state.password.length >= 6) {
-                passwordIsValid = true;
-                this.setState({
-                    password_error_text: null
-                });
-            } else {
-                this.setState({
-                    password_error_text: "Your password must be at least 6 characters"
-                });
-            }
-        }
-
-        if (emailIsValid && passwordIsValid) {
-            this.setState({
-                disabled: false
-            });
-        }
-    }
-
-    changeValue(e, type) {
-        const value = e.target.value;
-        const nextState = {};
-        nextState[type] = value;
-        this.setState(nextState, () => {
-            this.isDisabled()
-        });
-    }
-
-    login() {
-        createUser(this.state.email, this.state.password);
-        this.setState({
-            open: false
-        });
-    }
-
-    render() {
-
-        let {open, email, password, email_error_text, password_error_text, disabled} = this.state;
-
-        const standardActions = (
-            <FlatButton
-                containerElement={<Link to="/portal" />}
-                disabled={this.state.disabled}
-                label="Submit"
-                onClick={this.login.bind(this)} 
-            />
-        );
-
-        return (
-            <div style={styles.container}>
-                <Dialog
-                    open={this.state.open}
-                    title="Enter Your Details to Login"
-                    actions={standardActions}
-                >
-                    <span className="hint--right hint--bounce" data-hint="Enter in your email address">
-                        <TextField
-                            hintText="Email"
-                            floatingLabelText="Email"
-                            type="email"
-                            errorText={this.state.email_error_text}
-                            onChange={e => this.changeValue(e, 'email')} 
-                        />
-                    </span>
-                    <br />
-                    <span className="hint--right hint--bounce" data-hint="Enter your password">
-                        <TextField
-                            hintText="Password"
-                            floatingLabelText="Password"
-                            type="password"
-                            errorText={this.state.password_error_text}
-                            onChange={e => this.changeValue(e, 'password')} 
-                        />
-                    </span>
-                </Dialog>
-                <h1>VPT</h1>
-                <h2>Project DALI</h2>
-                <RaisedButton
-                    label="Login"
-                    primary={true}
-                    onTouchTap={this.handleTouchTap.bind(this)} 
-                />
-            </div>
-        );
-    }
-}
-
-export default Form;
+ <Form>
+    <Form.Field>
+        <label>Name</label>
+        <input
+            name="Name"
+            value={Name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder='Name' />
+    </Form.Field>
+    <Form.Field>
+        <label>Description</label>
+        <input
+            name="Description"
+            value={Description}
+            placeholder='Description'
+            onChange={(e) => setDescription(e.target.value)}
+        />                    
+    </Form.Field>
+      <Form.Field>
+        <label>Location</label>
+        <input
+            name="Location"
+            value={Location}
+            placeholder='Location'
+            onChange={(e) => setLocation(e.target.value)}
+        />
+    </Form.Field>
+    <Form.Field>
+        <label>Salary</label>
+        <input
+            name="Salary"
+            value={Salary}
+            placeholder='Salary'
+            onChange={(e) => setSalary(e.target.value)}
+        />
+    </Form.Field>
+    <Form.Field>
+        <label>Start date</label>
+        <input
+            name="StartDate"
+            value={StartDate}
+            placeholder='Start Date'
+            onChange={(e) => setStartDate(e.target.value)}
+        />
+    </Form.Field>
+    <Form.Field>
+        <label>Close date</label>
+        <input
+            name="CloseDate"
+            value={CloseDate}
+            placeholder='Close Date'
+            onChange={(e) => setCloseDate(e.target.value)}
+        />
+    </Form.Field>
+    <Form.Field>
+        <label>State</label>
+        <input
+            name="State"
+            value={State}
+            placeholder='State'
+            onChange={(e) => setState(e.target.value)}
+        />
+    </Form.Field>
+    <Button type='submit' onClick={sendDataToAPI}>Update</Button>
+</Form>

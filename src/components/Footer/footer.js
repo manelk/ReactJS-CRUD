@@ -1,7 +1,5 @@
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
+import Container from "@material-ui/core/Container";
+import Box from "@material-ui/core/Box";
 
 export default function Footer() {
   return (
@@ -9,13 +7,11 @@ export default function Footer() {
       <Box
         color="white"
         style={{
-            backgroundColor: "#30D5C8"
+          backgroundColor: "#20B2AA",
         }}
       >
         <Container maxWidth="lg">
-          <Box textAlign="center" >
-            Job Compass  {new Date().getFullYear()}
-          </Box>
+          <Box textAlign="center">Job Compass {new Date().getFullYear()}</Box>
         </Container>
       </Box>
     </footer>
